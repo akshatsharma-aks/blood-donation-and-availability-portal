@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard - Blood Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">🩸 Blood Portal</div>
+        <ul class="nav-links">
+            <li class="active" id="nav-overview">Overview</li>
+            <li id="nav-requests">View Requests</li>
+            <li id="nav-history">Donation History</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2>Welcome, <span id="donorName">Donor</span>!</h2>
+            <button class="btn btn-secondary" onclick="api.logout()" style="width: auto; padding: 5px 15px; background: #555; color: white;">Logout</button>
+        </div>
+
+        <div class="content-area">
+            
+            <div class="card">
+                <h3>Profile Status</h3>
+                <p><strong>Blood Group:</strong> <span id="bloodGroupDisplay">Loading...</span></p>
+                <p><strong>Verification Status:</strong> <span id="verificationStatusBadge" class="status-badge">Loading...</span></p>
+                <p style="font-size: 0.9em; color: #666; margin-top: 10px;">* Verified donors are prioritized in search results. Verification lasts for 90 days.</p>
+                <button id="reqVerificationBtn" class="btn btn-primary" style="margin-top: 10px; width: auto; display: none;">Request Hospital Verification</button>
+            </div>
+
+            <div class="card">
+                </div>
+
+            <div class="card">
+                <h3>Active Blood Requests Near You</h3>
+                <div id="requestsContainer">
+                    <p>Loading requests...</p>
+                </div>
+            </div>
+
+            <div class="card" id="donationHistorySection" style="margin-top: 20px;">
+                <h3>Upload Donation History</h3>
+                <p style="font-size: 0.9em; color: #666; margin-bottom: 15px;">
+                    Upload a recent donation certificate to get your profile verified by a hospital.
+                </p>
+                <form id="donationHistoryForm">
+                    <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>Hospital ID (Where you donated)</label>
+                            <input type="number" id="historyHospitalId" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label>Date of Donation</label>
+                            <input type="date" id="donationDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label>Certificate Image / Proof</label>
+                        <input type="file" id="certificateFile" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: auto;">Upload for Verification</button>
+                </form>
+            </div>
+
+        </div> 
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/donor.js"></script>
+</body>
+</html>

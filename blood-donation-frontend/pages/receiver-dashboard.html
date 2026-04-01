@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receiver Dashboard - Blood Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">🩸 Blood Portal</div>
+        <ul class="nav-links">
+            <li class="active" id="nav-overview" onclick="switchTab('overview')">My Requests</li>
+            <li id="nav-create" onclick="switchTab('create')">Request Blood</li>
+            <li id="nav-search" onclick="switchTab('search')">Search Network</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2>Welcome, <span id="receiverName">Receiver</span>!</h2>
+            <button class="btn btn-secondary" onclick="api.logout()" style="width: auto; padding: 5px 15px; background: #555; color: white;">Logout</button>
+        </div>
+
+        <div class="content-area">
+            
+            <div id="section-overview" style="display: block;">
+                <div class="card">
+                    <h3>My Blood Requests</h3>
+                    <div id="myRequestsContainer">
+                        <p>Loading your requests...</p>
+                        </div>
+                </div>
+            </div>
+
+            <div id="section-create" style="display: none;">
+                <div class="card">
+                    <h3>Create a Blood Request</h3>
+                    <p style="margin-bottom: 15px; color: #666;">Fill this out to alert nearby donors and hospitals.</p>
+                    <form id="bloodRequestForm">
+                        <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                            <div class="form-group" style="flex: 1;">
+                                <label>Blood Group Needed</label>
+                                <select id="reqBloodGroup" required>
+                                    <option value="A_POS">A+</option>
+                                    <option value="A_NEG">A-</option>
+                                    <option value="B_POS">B+</option>
+                                    <option value="B_NEG">B-</option>
+                                    <option value="AB_POS">AB+</option>
+                                    <option value="AB_NEG">AB-</option>
+                                    <option value="O_POS">O+</option>
+                                    <option value="O_NEG">O-</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Units Required</label>
+                                <input type="number" id="reqUnits" min="1" max="10" required>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Urgency Level</label>
+                                <select id="reqUrgency" required>
+                                    <option value="URGENT">Urgent (Within 24hrs)</option>
+                                    <option value="EMERGENCY" style="color: red; font-weight: bold;">EMERGENCY (Immediate)</option>
+                                    <option value="ROUTINE">Routine (Scheduled surgery)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Hospital Name (Where blood is needed)</label>
+                            <input type="text" id="reqHospital" required placeholder="e.g., Sharda Hospital">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>City / Location Area</label>
+                            <input type="text" id="reqLocation" required placeholder="e.g., Greater Noida">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" id="submitRequestBtn">Broadcast Request</button>
+                        <div id="requestMsg" style="margin-top: 10px; display: none;"></div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="section-search" style="display: none;">
+                <div class="card">
+                    <h3>Search Donors & Hospitals</h3>
+                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <input type="text" id="searchCity" placeholder="Enter City (e.g., Greater Noida)" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <select id="searchType" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                            <option value="DONOR">Verified Donors</option>
+                            <option value="HOSPITAL">Hospitals / Blood Banks</option>
+                        </select>
+                        <button class="btn btn-primary" onclick="searchNetwork()" style="width: auto;">Search</button>
+                    </div>
+
+                    <div id="searchResults">
+                        <p style="color: #666;">Enter a city to find nearby verified users.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/receiver.js"></script>
+</body>
+</html>

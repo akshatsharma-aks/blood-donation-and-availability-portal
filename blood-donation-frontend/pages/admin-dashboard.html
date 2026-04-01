@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Blood Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <style>
+        /* Admin Specific Styles */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .stat-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            border-bottom: 4px solid #d32f2f;
+        }
+        .stat-card h2 { font-size: 36px; color: #333; margin-bottom: 5px; }
+        .stat-card p { color: #666; font-size: 14px; text-transform: uppercase; font-weight: bold; }
+        
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        .data-table th, .data-table td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        .data-table th { background-color: #f4f7f6; color: #333; }
+        .data-table tr:hover { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">🛡️ Admin Portal</div>
+        <ul class="nav-links">
+            <li class="active" id="nav-overview" onclick="switchTab('overview')">System Overview</li>
+            <li id="nav-hospitals" onclick="switchTab('hospitals')">Verify Hospitals</li>
+            <li id="nav-users" onclick="switchTab('users')">Manage Users</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2>Welcome, System Administrator</h2>
+            <button class="btn btn-secondary" onclick="api.logout()" style="width: auto; padding: 5px 15px; background: #555; color: white;">Logout</button>
+        </div>
+
+        <div class="content-area">
+            
+            <div id="section-overview" style="display: block;">
+                <h3 style="margin-bottom: 15px;">Platform Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h2 id="stat-donors">0</h2>
+                        <p>Total Donors</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2 id="stat-verified-donors">0</h2>
+                        <p>Verified Donors</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2 id="stat-hospitals">0</h2>
+                        <p>Total Hospitals</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2 id="stat-blood-units">0</h2>
+                        <p>Available Blood Units</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2 id="stat-requests">0</h2>
+                        <p>Total Blood Requests</p>
+                    </div>
+                    <div class="stat-card">
+                        <h2 id="stat-donations">0</h2>
+                        <p>Total Donations</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="section-hospitals" style="display: none;">
+                <div class="card">
+                    <h3>Pending Hospital Registrations</h3>
+                    <p style="color: #666; margin-bottom: 15px;">Review and approve hospital licenses so they can start managing inventory and verifying donors.</p>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Hospital Name</th>
+                                <th>License Number</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingHospitalsTable">
+                            <tr><td colspan="4" style="text-align: center;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="section-users" style="display: none;">
+                <div class="card">
+                    <h3>User Management</h3>
+                    <p style="color: #666; margin-bottom: 15px;">Suspend or activate user accounts across the platform.</p>
+                    
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr><td colspan="4" style="text-align: center;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

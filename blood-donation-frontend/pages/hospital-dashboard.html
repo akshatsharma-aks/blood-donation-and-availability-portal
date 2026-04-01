@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Dashboard - Blood Portal</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <style>
+        /* Specific styles for inventory grid */
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .inventory-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            background: #fafafa;
+        }
+        .inventory-card h2 { color: #d32f2f; margin-bottom: 5px; font-size: 24px; }
+        .inventory-card p { margin-bottom: 10px; color: #666; font-size: 14px; }
+        .inventory-card input { width: 60px; padding: 5px; text-align: center; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">🏥 Hospital Portal</div>
+        <ul class="nav-links">
+            <li class="active" id="nav-inventory" onclick="switchTab('inventory')">Blood Inventory</li>
+            <li id="nav-verify" onclick="switchTab('verify')">Verify Donors</li>
+            <li id="nav-requests" onclick="switchTab('requests')">Blood Requests</li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar">
+            <h2><span id="hospitalName">Loading...</span></h2>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span id="hospitalStatusBadge" class="status-badge">Checking Status...</span>
+                <button class="btn btn-secondary" onclick="api.logout()" style="padding: 5px 15px; background: #555; color: white;">Logout</button>
+            </div>
+        </div>
+
+        <div id="unverifiedWarning" style="display: none; background: #ff9800; color: white; padding: 10px 30px; text-align: center;">
+            Your hospital is pending verification from the Admin. You cannot verify donors until your account is approved.
+        </div>
+
+        <div class="content-area">
+            
+            <div id="section-inventory" style="display: block;">
+                <div class="card">
+                    <h3>Manage Blood Inventory</h3>
+                    <p style="color: #666;">Update your current available blood units. This is visible to receivers.</p>
+                    
+                    <div class="inventory-grid" id="inventoryContainer">
+                        <p>Loading inventory...</p>
+                        </div>
+                </div>
+            </div>
+
+            <div id="section-verify" style="display: none;">
+                <div class="card">
+                    <h3>Pending Donor Verifications</h3>
+                    <p style="color: #666; margin-bottom: 15px;">Donors who have requested verification at your hospital.</p>
+                    
+                    <div id="verificationsContainer">
+                        <p>Loading verification requests...</p>
+                        </div>
+                </div>
+            </div>
+
+            <div id="section-requests" style="display: none;">
+                <div class="card">
+                    <h3>Active Blood Requests</h3>
+                    <p style="color: #666; margin-bottom: 15px;">Emergency requests from receivers in your area.</p>
+                    
+                    <div id="requestsContainer">
+                        <p>Loading requests...</p>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/hospital.js"></script>
+</body>
+</html>
