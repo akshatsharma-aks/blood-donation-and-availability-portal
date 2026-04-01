@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Portal - Register</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="auth-container" style="height: auto; padding: 40px 0;">
+        <div class="auth-card" style="max-width: 500px;">
+            <h2>Create an Account</h2>
+            <p>Join the Blood Donation Network</p>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Register As</label>
+                    <select id="regRole" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="DONOR">Blood Donor</option>
+                        <option value="RECEIVER">Receiver (Need Blood)</option>
+                        <option value="HOSPITAL">Hospital / Blood Bank</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Full Name / Contact Person</label>
+                    <input type="text" id="regName" required placeholder="Enter full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="regEmail" required placeholder="Enter email">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="regPhone" required placeholder="Enter 10-digit number">
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" required placeholder="Create a secure password">
+                </div>
+
+                <div class="form-group location-group" style="background: #f9f9f9; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+                    <label>Location Details</label>
+                    <button type="button" id="getLocationBtn" class="btn btn-secondary" style="margin-bottom: 10px; background: #555; color: white;">📍 Detect My Location</button>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="regCity" placeholder="City" required>
+                        <input type="text" id="regState" placeholder="State" required>
+                    </div>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <input type="number" id="regLat" step="any" placeholder="Latitude" readonly required>
+                        <input type="number" id="regLng" step="any" placeholder="Longitude" readonly required>
+                    </div>
+                </div>
+
+                <div id="donorFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Blood Group</label>
+                        <select id="regBloodGroup">
+                            <option value="A_POS">A+</option>
+                            <option value="A_NEG">A-</option>
+                            <option value="B_POS">B+</option>
+                            <option value="B_NEG">B-</option>
+                            <option value="AB_POS">AB+</option>
+                            <option value="AB_NEG">AB-</option>
+                            <option value="O_POS">O+</option>
+                            <option value="O_NEG">O-</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="hospitalFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Hospital / Blood Bank Name</label>
+                        <input type="text" id="regHospitalName" placeholder="Official Institution Name">
+                    </div>
+                    <div class="form-group">
+                        <label>License Number</label>
+                        <input type="text" id="regLicense" placeholder="Medical License Registration">
+                    </div>
+                </div>
+                
+                <div id="registerError" class="error-msg" style="display: none;"></div>
+                <div id="registerSuccess" class="success-msg" style="display: none; color: white; background: #4CAF50; padding: 10px; border-radius: 4px; margin-bottom: 15px; text-align: center;"></div>
+                
+                <button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
+            </form>
+            
+            <p class="auth-switch">Already have an account? <a href="index.html">Login here</a></p>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>
